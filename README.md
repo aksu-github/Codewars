@@ -9,5 +9,5 @@ I am currently uploading each file individually right now based off my local sto
 
 I was originally pushing hard on doing harder and harder kata's, but then I realized it is not really beneficial if I just muscle my way through them. I came to realize to use Codewars more as a way to maintain and build up a stable coding baseline instead, for I am not always able to discern from a good and proper or bad way of coding. This became prevalent as I moved into the harder katas that focused more on optimization.
 
-// 07/17/2022
-Ok, I figured out how to contribute to my own repo. I no longer have to upload each file individually.
+Edit 07/17/2022 // I figured out how to contribute to my own repo. I no longer have to upload each file individually.
+Edit 07/18/2022 // My VS Code contribution for Codewars repo did not update a green box in my profile?
