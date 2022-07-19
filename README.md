@@ -11,3 +11,4 @@ I was originally pushing hard on doing harder and harder kata's, but then I real
 
 Edit 07/17/2022 // I figured out how to contribute to my own repo. I no longer have to upload each file individually.
 Edit 07/18/2022 // My VS Code contribution for Codewars repo did not update a green box in my profile?
+Edit 07/19/2022 // Fixed non-contibution on Github. Command line Github email was not the same as the verified email under Github settings.
