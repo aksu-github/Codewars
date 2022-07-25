@@ -8,5 +8,5 @@ I was originally pushing hard on doing more challenging kyus (i.e. 5kyu and abov
 
 Edit 07/17/22 - Figured out how to contribute to my own repo. No longer upload each file individually.  
 Edit 07/18/22 - Contribution for Codewars repo not registering. No green square update on profile.  
-Edit 07/19/22 - Fixed contibution issue. Command line Github email did not match verified email under Github settings.
+Edit 07/19/22 - Fixed contibution issue. Command line Github email did not match verified email under Github settings.  
 Edit 07/25/22 - Fixed README.md basic format issue in VS Code. (# for header importance. /s{2} after each line to line break)  
