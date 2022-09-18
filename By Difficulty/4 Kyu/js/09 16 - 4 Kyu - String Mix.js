@@ -119,48 +119,106 @@ function mix(s1, s2) {
   return res.slice(0,-1)
 }
 
-//  let sortedArray = array.sort(function(a, b) {
-//     if (a[0] == b[0]) {
-//       return a[1] - b[1];
-//     }
-//     return b[0] - a[0];
-//   });
+
+
 
 
 //  Codewars - Best Solution
 
 function mix(s1, s2) {
-  var counter = s => s.replace(/[^a-z]/g,'').split('').sort().reduce((x,y)=> (x[y] = 1 + (x[y]||0), x),{});
-  s1 = counter(s1); s2 = counter(s2);
-  var res = [], keys = new Set(Object.keys(s1).concat(Object.keys(s2)));
+  let res = [];
+  let keys = {};
+  let regex = /[^a-z]/g;
+  /* 
+    let counter = s => s.replace(regex,'')
+                      .split('')
+                      .sort()
+                      .reduce(function(e,i){
+                        e[i] = 1 + (e[i]||0);
+                        return e;
+                      }, {})
+                      
+    Somehow the reduce((a,b) => ......)
+      is not (previousValue, currentValue)
+      but (element, index)
+    
+    Probably due to implementation of 
+      (a[b] = 1 + (a[b]||0), a)
+      
+    MDN does not exactly explicitly state it.
+  */
+  let counter = s => s.replace(regex,'').split('').sort().reduce((a,b) => (a[b] = 1 + (a[b]||0), a),{});
+
+  //  Create { e: 4, h: 2, r: 2, t: 1, y: 1 }
+  s1 = counter(s1); 
+  s2 = counter(s2);
+  
+  //  Create set from s1 and s2
+  keys = new Set(Object.keys(s1).concat(Object.keys(s2)));
+
   keys.forEach(key => {
-    var c1 = s1[key]||0, c2 = s2[key]||0, count = Math.max(c1, c2);
+    //  Grab keys from the set and iterate thru said keys in s1 and s2 to get value pairs from s1 and s2
+    let c1 = s1[key]||0;
+    let c2 = s2[key]||0;
+    //  Find which value is greater
+    let count = Math.max(c1, c2);
+    
     if (count>1) {
-      var from = [1, '=', 2][Math.sign(c2-c1)+1];
-      var str = [...Array(count)].map(_=>key).join('');
+      //  [1, '=', 2][?] --> static array with variable index determined by previous values.
+      //  Variable index can only be [0], [1], [2]
+      //  so we are selecting either [1], ['='], or [2] from the static array
+      let from = [1, '=', 2][Math.sign(c2-c1)+1];
+      
+      //  repeat the key required count number of times
+      let str = key.repeat(count);
       res.push(from+':'+str);
     }
   });
-  return res.sort((x, y) => y.length - x.length || (x < y ? -1 : 1)).join('/');
+  
+  //  custom sort
+  res = res.sort( (a,b) => b.length - a.length || a > b ? 1 : -1).join('/')
+  return res;
 }
+
+
+
+
+
 
 const alphabet = 'abcdefghijklmnopqrstuvwxyz'.split('');
 
 function mix(s1, s2) {
   return alphabet
-    .map(char => {
-      const s1Count = s1.split('').filter(x => x === char).length,
-            s2Count = s2.split('').filter(x => x === char).length,
+    //  Map new array of alphabet
+    .map(e => {
+      //  Filter for alphabet element to match s1
+      //  use length to get count
+      const s1Count = s1.split('').filter(x => x === e).length,
+            s2Count = s2.split('').filter(x => x === e).length,
             maxCount = Math.max(s1Count, s2Count);
 
+      //  Return as Array of object from a-z
+      //  [ { char: 'a', count: 1, src: '2' },
+      //    { char: 'b', count: 0, src: '=' },
+      //    ... etc
       return {
-        char: char,
+        char: e,
         count: maxCount,
-        src: maxCount > s1Count ? '2' : maxCount > s2Count ? '1' : '='
+        src: maxCount > s1Count ? '2' : 
+             maxCount > s2Count ? '1' : 
+             '='
       };
     })
-    .filter(c => c.count > 1)
+    //  filter for used chars
+    .filter(e => e.count > 1)
+  
+    //  priority custom filter 
+    //  by count
+    //  then by value of src + char
     .sort((objA, objB) => objB.count - objA.count || (objA.src + objA.char > objB.src + objB.char ? 1 : -1))
-    .map(c => `${c.src}:${c.char.repeat(c.count)}`)
+  
+    //  repeat e by count
+    //  formatting
+    .map(e => `${e.src}:${e.char.repeat(e.count)}`)
     .join('/');
 }
