@@ -7,7 +7,7 @@ and returns a string containing the same characters in alphabetical order.
 
 */
 
-//  My Solution - Didnt Work Dont know why
+//  My Solution
 
 function sortGiftCode(code){
   let unique = new Set(code).size == code.length;
