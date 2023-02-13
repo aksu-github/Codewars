@@ -18,3 +18,9 @@ var countSheep = function (num){
   }
   return res;
 }
+
+//  Codewars
+
+var countSheep = function(num){
+  return Array.from( {num}, (_,i) => ++i + ` sheep...`).join('');
+}
